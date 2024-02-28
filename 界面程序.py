@@ -908,16 +908,19 @@ class PageThree(tk.Frame):
 
         # 将生成的文本和截图整合到Word文档中
         all_files = os.listdir()
-
-        fu_files = sorted([f for f in all_files if re.match(r'fu_\d+\.txt', f)])
-        screenshot_files = sorted([f for f in all_files if re.match(r'screenshot_\d+\.png', f)])
-
+        fu_files = sorted(
+            [f for f in all_files if re.match(r'fu_\d+\.txt', f)],
+            key=lambda x: int(re.search(r'(\d+)', x).group())
+        )
+        screenshot_files = sorted(
+            [f for f in all_files if re.match(r'screenshot_\d+\.png', f)],
+            key=lambda x: int(re.search(r'(\d+)', x).group())
+        )
         doc = Document()
-
-        for i in range(max(len(fu_files), len(screenshot_files))):
+        max_files = max(len(fu_files), len(screenshot_files))
+        for i in range(max_files):
             if i < len(screenshot_files):
                 doc.add_picture(screenshot_files[i], width=Inches(7))
-
             if i < len(fu_files):
                 with open(fu_files[i], 'r', encoding='utf-8') as file:
                     text = file.read()
