@@ -31,13 +31,26 @@ for pattern in ['fu_*.txt', 'screenshot_*.png', 'note_*.xlsx', 'xhs_*.xlsx','*.d
             for file in glob.glob(pattern):
                 os.remove(file)
 #获取cookie文件
+urls = [
+    "https://www.baidu.com/link?url=aXGalUXyzrCO7M510Bb8iZjfP_NghcPrkOnY0ShyQML-vGRJBKjOLh89cRjy6VEH&wd=&eqid=84db72770083d32a0000000665e53abb",
+    "https://www.baidu.com/link?url=l64UVulqbFZLlFyjD6P3aV_TOE3_OWB4bW-1u-mR-O8rPmvA0EAgHaCMq571Murw&wd=&eqid=9f682c5600f435510000000665e53ade",
+    "https://www.baidu.com/link?url=uG3sW0yfRXTIRtat1kpA_f_WrlsPpvs5Cf_Csp8tmRAXUe75cyhNXEtrmawMw1_u&wd=&eqid=de96f5d000001f6f0000000665dac3ce",
+    "https://www.baidu.com/link?url=lGqYCGniL7PtJ1DREzCBQqVd07s3KFBsXiESdnNAqp62A53R7JEkj8pZz3kP724y&wd=&eqid=8267aa0a00f451f30000000665e53af1",
+    "https://www.baidu.com/link?url=0rlK9EGZkAHO9HXFOdOApBQdOI3ZRKygKcPM6z-zevawjl8VebOhQXBCmB2ScDpl&wd=&eqid=b526dbc600f410120000000665e53afb",
+    "https://www.baidu.com/link?url=l5rZsPOhXfKmYsI0CCFAItwxlqpbM5lVbRh5nYvfEStp0V2lzv8xELN1OG75Zi_O&wd=&eqid=c143e9c800f3e7e40000000665e53b05",
+    "https://www.baidu.com/link?url=nkzhVr3uSv1-_bl28p0VA8wFDo1fF15_sCdz9XJUde8Br6rP5segHUtAB1at7NeY&wd=&eqid=d862a6780081babd0000000665e53b0c",
+    "https://www.baidu.com/link?url=PJGKS_bpaBSL3yHFLEZDh-JvKnQpqtuM7SS6rir2jwqQh82B9TWCW1wpaYCu2PeL&wd=&eqid=863ec96b0080c1c90000000665e53b21",
+    "https://www.baidu.com/link?url=UQviTRc-xlevI6q0rTTEJGNhMKHMduJuif9koWN4hQLPOaxAqnnuI1woSspji1b8&wd=&eqid=8f6ccdc300f754e10000000665e53b28",
+    "https://www.baidu.com/link?url=hNcf_dpLvZPkgERKCBV0prATWqE7rrMU9a4TmGkO3gzgpOjKxVBCOuoGx6gjnqnA&wd=&eqid=c037ff1800f56df20000000665e53b2f",
+    "https://www.baidu.com/link?url=P4GFZ4uvQlEHDGp1mEtT2wcH_WKUQrRmXrJUpslCr-uRZV5OEC2ADbkWS_pI8TZW&wd=&eqid=e93e65ae0011e2d70000000665e53b3f"
+]
+#获取cookie文件
 if not os.path.exists('cookies.txt'):
     options = Options()
     options.add_argument("--disable-blink-features=AutomationControlled")
     driver = webdriver.Chrome(options=options)
-    driver.get(
-        url=r"https://www.baidu.com/link?url=uG3sW0yfRXTIRtat1kpA_f_WrlsPpvs5Cf_Csp8tmRAXUe75cyhNXEtrmawMw1_u&wd=&eqid=de96f5d000001f6f0000000665dac3ce")
-
+    url = random.choice(urls)
+    driver.get(url)
     time.sleep(30)
     cookie_list = driver.get_cookies()
     cookies = {}
